@@ -7,11 +7,17 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include <QDesktopServices>
+#include <QUrl>
+
+#include "thumbnails.h"
+
 int main(int argc, char *argv[]) {
   QApplication app(argc, argv);
 
   // Create file system model
   QFileSystemModel *model = new QFileSystemModel;
+  model->setIconProvider(new ThumbnailProvider);
   model->setRootPath(argv[1]); // Start at home directory
   model->setFilter(QDir::AllEntries |
                    QDir::NoDotAndDotDot); // Show files and folders
